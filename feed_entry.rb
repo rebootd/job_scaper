@@ -10,7 +10,7 @@ class FeedEntry
 
   def is_match?
   	# need to search entry.content and entry.title
-  	puts "checking #{feed_entry.url}"
+  	# puts "checking #{feed_entry.url}"
 
   	found_all = true
   	params.match_all.each {|word| 
