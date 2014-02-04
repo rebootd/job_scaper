@@ -22,7 +22,7 @@ class TwitterSearch
 
   def get_matches
 
-  	client.search("\#jobs", :result_type => "recent").take(300).each do |tweet|
+  	client.search("\#jobs", :result_type => "recent").take(1000).each do |tweet|
       # puts tweet.uri
       entry = TwitterEntry.new(tweet, params)
       matches << entry if entry.is_match?

@@ -25,10 +25,30 @@ params.match_any = [
 	'mobile app'
 	]
 
-f = TwitterSearch.new params
-t_matches = f.get_matches
-write_report t_matches, 'twitter'
+wait_twitter = true
+wait_feed = true
 
-f = FeedSearch.new params
-# f_matches = f.get_matches
-# write_report f_matches, 'feed'
+Thread.new do
+  f = TwitterSearch.new params
+  t_matches = f.get_matches
+  write_report t_matches, 'twitter'
+  puts 'done with twitter search'
+  wait_twitter = false
+end
+
+Thread.new do
+  # only run the feed search once per day
+  # if ResultsWriter.exists?('feed')
+  # 	wait_feed = false
+  # 	return
+  # end
+
+  f = FeedSearch.new params
+  f_matches = f.get_matches
+  write_report f_matches, 'feed'
+  puts 'done with feed search'
+  wait_feed = false
+end
+
+while (wait_twitter || wait_feed) do
+end
