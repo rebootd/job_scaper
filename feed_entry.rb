@@ -10,37 +10,39 @@ class FeedEntry
 
   def is_match?
   	# need to search entry.content and entry.title
+  	puts "checking #{feed_entry.url}"
+
   	found_all = true
   	params.match_all.each {|word| 
   		# if not found, found_all is false
-  		if !(/#{word}/i.match(@feed_entry.content) || /#{word}/i.match(@feed_entry.title))
+  		if !(/#{word}/i.match(@feed_entry.content) || /#{word}/i.match(@feed_entry.summary) || /#{word}/i.match(@feed_entry.title))
   			found_all = false
   			break 
   		end
   		
   	}
 
-  	return false if !found_all
+  	return false if !found_all && params.match_all.count > 0
 
   	found_atleast_one = false
   	params.match_atleast_one.each {|word| 
-  		if (/#{word}/i.match(@feed_entry.content) || /#{word}/i.match(@feed_entry.title))
+  		if (/#{word}/i.match(@feed_entry.content) || /#{word}/i.match(@feed_entry.summary) || /#{word}/i.match(@feed_entry.title))
   			found_atleast_one = true
   			break 
   		end
 	}
 
-	return false if !found_atleast_one
+	return false if !found_atleast_one && params.match_atleast_one.count > 0
 
   	found_any = false
   	params.match_any.each {|word| 
-  		if (/#{word}/i.match(@feed_entry.content) || /#{word}/i.match(@feed_entry.title))
+  		if (/#{word}/i.match(@feed_entry.content) || /#{word}/i.match(@feed_entry.summary) || /#{word}/i.match(@feed_entry.title))
   			found_any = true
   			break 
   		end
   	}
 
-  	true
+  	found_any
   end
 
   def to_html
