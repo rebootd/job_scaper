@@ -9,6 +9,7 @@ feed_list = [
 	'https://losangeles.craigslist.org/sof/index.rss',
 	'https://sandiego.craigslist.org/sof/index.rss',
 	'https://sfbay.craigslist.org/sof/index.rss',
+	'https://santabarbara.craigslist.org/sof/index.rss',
 	'https://atlanta.craigslist.org/sof/index.rss',
 	'https://austin.craigslist.org/sof/index.rss',
 	'https://boston.craigslist.org/sof/index.rss',
@@ -29,7 +30,7 @@ matches = []
 params = SearchParams.new
 # params.match_all << 'contract'
 # params.match_atleast_one = ['remote', 'telecommute']
-params.match_any = ['javascript', 'node', 'ruby', 'rails', 'c#', 'angular', 'android']
+params.match_any = ['javascript', 'node', 'ruby', 'rails', 'c#', 'angular', 'android', 'mobile app']
 
 feed_list.each {|link|
 
