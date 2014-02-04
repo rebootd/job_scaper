@@ -8,6 +8,10 @@ class FeedEntry
     @params = params ||= SearchParams.new
   end
 
+  def published
+  	feed_entry.published
+  end
+
   def is_match?
   	# need to search entry.content and entry.title
   	# puts "checking #{feed_entry.url}"
@@ -46,7 +50,9 @@ class FeedEntry
   end
 
   def to_html
-  	"<div> <a target='_blank' href='#{feed_entry.url}'>#{feed_entry.title}</a> </div>"
+  	"<div> 
+  	<a target='_blank' href='#{feed_entry.url}'>#{feed_entry.title}</a> 
+  	</div>"
   end
 
 end
