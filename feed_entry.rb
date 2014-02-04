@@ -34,9 +34,9 @@ class FeedEntry
   			found_atleast_one = true
   			break 
   		end
-	}
+	  }
 
-	return false if !found_atleast_one && params.match_atleast_one.count > 0
+	  return false if !found_atleast_one && params.match_atleast_one.count > 0
 
   	found_any = false
   	params.match_any.each {|word| 
@@ -50,9 +50,9 @@ class FeedEntry
   end
 
   def to_html
-  	"<div> 
+  	"<li> 
   	<a target='_blank' href='#{feed_entry.url}'>#{feed_entry.title}</a> 
-  	</div>"
+  	</li>"
   end
 
 end

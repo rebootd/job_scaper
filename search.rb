@@ -1,58 +1,34 @@
 require 'feedzirra'
-require './feed_entry'
-require './search_params'
 require './results_writer'
+require './feed_search'
+require './twitter_search'
+require './search_params'
 
-feed_list = [
-	# 'https://toprubyjobs.com/jobs.atom',
-	'https://phoenix.craigslist.org/search/sof?query=%20&s=0&format=rss',
-	'https://losangeles.craigslist.org/sof/index.rss',
-	'https://sandiego.craigslist.org/sof/index.rss',
-	'https://sfbay.craigslist.org/sof/index.rss',
-	'https://santabarbara.craigslist.org/sof/index.rss',
-	'https://atlanta.craigslist.org/sof/index.rss',
-	'https://austin.craigslist.org/sof/index.rss',
-	'https://boston.craigslist.org/sof/index.rss',
-	# 'https://chicago.craigslist.org/sof/index.rss',
-	'https://dallas.craigslist.org/sof/index.rss',
-	'https://denver.craigslist.org/sof/index.rss',
-	'https://lasvegas.craigslist.org/sof/index.rss',
-	'https://miami.craigslist.org/sof/index.rss',
-	'https://newyork.craigslist.org/sof/index.rss',
-	'https://minneapolis.craigslist.org/sof/index.rss',
-	'https://philadelphia.craigslist.org/sof/index.rss',
-	'https://portland.craigslist.org/sof/index.rss',
-	'https://seattle.craigslist.org/sof/index.rss'
-	]
+def write_report(matches, prefix)
+  matches.sort! { |x,y| y.published <=> x.published }
 
-matches = []
+  writer = ResultsWriter.new './results', matches, prefix
+  writer.write
+end
 
 params = SearchParams.new
 # params.match_all << 'contract'
 # params.match_atleast_one = ['remote', 'telecommute']
-params.match_any = ['javascript', 'node', 'ruby', 'rails', 'c#', 'angular', 'android', 'mobile app']
+params.match_any = [
+	'javascript', 
+	'node', 
+	'ruby', 
+	'rails', 
+	# 'c#', 
+	'angular', 
+	'android', 
+	'mobile app'
+	]
 
-feed_list.each {|link|
+f = TwitterSearch.new params
+t_matches = f.get_matches
+write_report t_matches, 'twitter'
 
-	puts ''
-	puts "searching '#{link}' "
-	
-	feed = Feedzirra::Feed.fetch_and_parse(link)
-
-	feed.entries.each {|entry|	  
-	  print '.'
-	  e = FeedEntry.new(entry, params)
-	  matches << e if e.is_match?
-
-	}
-
-}
-
-puts ''
-puts "match count: #{matches.count}"
-puts "\n\n"
-
-matches.sort! { |x,y| y.published <=> x.published }
-
-writer = ResultsWriter.new './results', matches
-writer.write
+f = FeedSearch.new params
+# f_matches = f.get_matches
+# write_report f_matches, 'feed'
