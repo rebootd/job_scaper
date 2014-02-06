@@ -29,7 +29,11 @@ class FeedSearch
 		'https://minneapolis.craigslist.org/sof/index.rss',
 		'https://philadelphia.craigslist.org/sof/index.rss',
 		'https://portland.craigslist.org/sof/index.rss',
-		'https://seattle.craigslist.org/sof/index.rss'
+		'https://seattle.craigslist.org/sof/index.rss',
+		'https://washingtondc.craigslist.org/sof/index.rss',
+		'http://jobmote.com/feed.rss',
+		'https://careers.stackoverflow.com/jobs/feed?searchTerm=&allowsremote=True',
+		'https://jobs.github.com/positions.atom',
 		]
   end  
 

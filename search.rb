@@ -29,12 +29,12 @@ params.match_any = [
 # wait_feed = true
 
 # Thread.new do
-  f = TwitterSearch.new params
-  t_matches = f.get_matches
-  write_report t_matches, 'twitter'
-  puts 'done with twitter search'
-  t_matches = nil
-  f = nil
+  # f = TwitterSearch.new params
+  # t_matches = f.get_matches
+  # write_report t_matches, 'twitter'
+  # puts 'done with twitter search'
+  # t_matches = nil
+  # f = nil
 #   wait_twitter = false
 # end
 
