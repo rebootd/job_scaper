@@ -19,7 +19,7 @@ params.match_any = [
 	'node', 
 	'ruby', 
 	'rails', 
-	# 'c#', 
+	'c#', 
 	'angular', 
 	'android', 
 	'mobile app'
